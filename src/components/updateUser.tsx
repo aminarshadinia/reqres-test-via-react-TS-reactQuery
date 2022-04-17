@@ -5,7 +5,7 @@ import { useAddUser } from "../hooks/useAddUser";
 import { Button, Container, LinearProgress, TextField } from "@mui/material";
 import { ErrorSwal, successSwal } from "../utilities/swal/swal";
 import Navbar from "./navbar";
-import DoneIcon from "@mui/icons-material/Done";
+import UpdateIcon from '@mui/icons-material/Update';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const Division = styled.section`
@@ -21,7 +21,7 @@ const AuthForm = styled.section`
   margin: auto;
 `;
 
-const AddUserPage = () => {
+const UpdateUserPage = () => {
   const navigate = useNavigate();
 
   const { mutate, isLoading } = useAddUser({
@@ -69,15 +69,15 @@ const AddUserPage = () => {
               variant="outlined"
             />
           </AuthForm>
-          <section style={{ margin: "30px 0" }}>
+          <section style={{ marginTop: "30px" }}>
             <Button
               onClick={addUser}
               style={{ marginRight: "20px" }}
               variant="contained"
               color="success"
-              startIcon={<DoneIcon />}
+              startIcon={<UpdateIcon />}
             >
-              Submit
+              Update
             </Button>
             <Button
               onClick={() => navigate(-1)}
@@ -96,4 +96,4 @@ const AddUserPage = () => {
   );
 };
 
-export default AddUserPage;
+export default UpdateUserPage;
