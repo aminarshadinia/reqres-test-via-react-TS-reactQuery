@@ -16,9 +16,9 @@ export default function UserListPage() {
   const [userList, setUserList] = useState<fetchData[]>([]);
 
   const queryInfo = useQuery(
-    "dd",
-    async () => {
-      return await getUserList();
+    "userList",
+    () => {
+      return getUserList();
     },
     {
       onSuccess: (res) => {
@@ -27,8 +27,12 @@ export default function UserListPage() {
     }
   );
 
-  const addUser = () => {
+  const addUserPage = () => {
     navigate("/add-user");
+  };
+
+  const updateUserPage = () => {
+    navigate("/update-user");
   };
 
   return (
@@ -36,7 +40,7 @@ export default function UserListPage() {
       <Navbar />
       <Container>
         <Button
-          onClick={addUser}
+          onClick={addUserPage}
           style={{ marginTop: "15px" }}
           variant="contained"
           color="success"
@@ -52,7 +56,7 @@ export default function UserListPage() {
         >
           {userList.map((data, idx) => (
             <Grid xs={4} spacing={3} style={{ marginTop: "30px" }}>
-              <Card sx={{ maxWidth: 300 }} key={idx}>
+              <Card sx={{ maxWidth: 300 }} key={idx} onClick={updateUserPage}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
