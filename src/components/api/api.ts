@@ -17,7 +17,7 @@ export const getUserList = async () => {
     method: "get",
     url: `${BASE_URL}/users?page=2`,
   };
-  await axios.request(requestConfig);
+  return axios.request(requestConfig);
 };
 
 export const getSingleUser = async (id: number) => {
@@ -25,7 +25,7 @@ export const getSingleUser = async (id: number) => {
     method: "get",
     url: `${BASE_URL}/users/${id}`,
   };
-  await axios.request(requestConfig);
+  return axios.request(requestConfig);
 };
 
 export const onAddUser = async (data: AddUser) => {
