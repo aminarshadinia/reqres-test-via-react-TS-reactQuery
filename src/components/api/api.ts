@@ -1,7 +1,6 @@
-import { BASE_URL } from "../../env"
+import { BASE_URL } from "../../env";
 import axios, { AxiosRequestConfig } from "axios";
 import { AddUser, Credentials } from "../interfaces/interfaces";
-
 
 export const onLogin = async (data: Credentials) => {
   const requestConfig: AxiosRequestConfig = {
@@ -17,6 +16,15 @@ export const getUserList = async () => {
   const requestConfig: AxiosRequestConfig = {
     method: "get",
     url: `${BASE_URL}/users?page=2`,
+  };
+  const response = await axios.request(requestConfig);
+  return response;
+};
+
+export const getSingleUser = async (id: number) => {
+  const requestConfig: AxiosRequestConfig = {
+    method: "get",
+    url: `${BASE_URL}/users/${id}`,
   };
   const response = await axios.request(requestConfig);
   return response;
