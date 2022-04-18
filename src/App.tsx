@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import NotFoundPage from "./pages/404/NotFoundPage";
 import AddUserPage from "./pages/AddUserPage";
 import LoginPage from "./pages/LoginPage";
 import UpdateUserPage from "./pages/UpdateUserPage";
@@ -13,6 +14,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<LoginPage />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/user-list" element={<UserListPage />} />
