@@ -17,7 +17,7 @@ const UserList = () => {
   const navigate = useNavigate();
   const [userList, setUserList] = useState<FetchData[]>([]);
 
-  const queryInfo = useQuery(
+  useQuery(
     "userList",
     () => {
       return getUserList();
@@ -62,8 +62,8 @@ const UserList = () => {
         >
           {userList.map((data, idx) => (
             <Fragment key={idx}>
-              <Grid xs={4} item style={{ marginTop: "30px" }} >
-                <Card sx={{ maxWidth: 300 }} >
+              <Grid xs={4} item style={{ marginTop: "30px" }}>
+                <Card sx={{ maxWidth: 300 }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"

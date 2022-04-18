@@ -30,7 +30,7 @@ const Navbar = () => {
   };
   useEffect(() => {
     !localStorage.getItem("tokenId") && navigate("/login");
-  }, []);
+  }, [navigate]);
 
   return (
     <Nav>

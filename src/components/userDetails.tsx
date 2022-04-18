@@ -12,17 +12,17 @@ import { useParams } from "react-router-dom";
 
 const UserDetails = () => {
   const params = useParams();
-  const [singleUser, setSingleUser] = useState<SingleData>()
+  const [singleUser, setSingleUser] = useState<SingleData>();
 
-  const queryInfo = useQuery(
+  useQuery(
     "singleUser",
     () => {
       const userId = parseInt(params.id!);
-      return getSingleUser(userId)
+      return getSingleUser(userId);
     },
     {
       onSuccess: (res) => {
-        setSingleUser(res.data.data)
+        setSingleUser(res.data.data);
       },
     }
   );
@@ -37,10 +37,10 @@ const UserDetails = () => {
           justifyContent="center"
           alignItems="center"
         >
-          {singleUser && 
+          {singleUser && (
             <Fragment>
               <Grid style={{ marginTop: "30px" }}>
-              <p>Details...</p>
+                <p>Details...</p>
                 <Card sx={{ maxWidth: 600 }}>
                   <CardActionArea>
                     <CardMedia
@@ -64,10 +64,10 @@ const UserDetails = () => {
                 </Card>
               </Grid>
             </Fragment>
-          }
+          )}
         </Grid>
       </Container>
     </Fragment>
   );
-}
+};
 export default UserDetails;
