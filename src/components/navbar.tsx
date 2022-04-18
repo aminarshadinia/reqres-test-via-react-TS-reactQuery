@@ -26,11 +26,11 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
   };
-  useEffect(() => {
-    !localStorage.getItem("tokenId") && navigate("/login");
-  }, [navigate]);
+  // useEffect(() => {
+  //   !localStorage.getItem("tokenId") && navigate("/");
+  // }, [navigate]);
 
   return (
     <Nav>
