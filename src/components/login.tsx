@@ -5,6 +5,12 @@ import { useSubmit } from "../hooks/useSubmit";
 import { useNavigate } from "react-router-dom";
 import { ErrorSwal } from "../utilities/swal/swal";
 
+const Division = styled.section`
+  height: 100vh;
+  background-color: #001e3c;
+  padding-top: 200px;
+`;
+
 const AuthForm = styled.section`
   display: flex;
   align-item: center;
@@ -17,19 +23,26 @@ const FormWrapper = styled.section`
   display: flex;
   margin: auto;
   width: 450px;
-  box-shadow: 5px 10px 8px #888888;
+  box-shadow: 6px 11px 13px #888888;
   background-color: white;
   border-radius: 12px;
 `;
 
-const LoginPage = () => {
+const Login = () => {
   const navigate = useNavigate();
-  
+
   const { mutate } = useSubmit({
     onSuccess: (variables: any) => {
-      const tokenId = variables.token; 
+      const tokenId = variables.token;
       localStorage.setItem("tokenId", tokenId);
-      localStorage.getItem("tokenId") ? navigate("/user-list") : ErrorSwal();
+      localStorage.getItem("tokenId")
+        ? navigate("/user-list")
+        : ErrorSwal("Please Login again");
+    },
+    onError: (variables: any) => {
+      if (variables.toString()) {
+        ErrorSwal('Wrong Email and Password Combination');
+      }
     },
   });
 
@@ -43,18 +56,12 @@ const LoginPage = () => {
     mutate({ email, password });
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     localStorage.getItem("tokenId") && navigate("/user-list");
-  },[])
-  
+  }, []);
+
   return (
-    <div
-      style={{
-        height: "100vh",
-        backgroundColor: "#001E3C",
-        paddingTop: "200px",
-      }}
-    >
+    <Division>
       <FormWrapper>
         <AuthForm>
           <TextField
@@ -84,8 +91,8 @@ const LoginPage = () => {
           </Button>
         </AuthForm>
       </FormWrapper>
-    </div>
+    </Division>
   );
 };
 
-export default LoginPage;
+export default Login;
