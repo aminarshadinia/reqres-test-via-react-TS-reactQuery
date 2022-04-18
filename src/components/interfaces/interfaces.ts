@@ -3,6 +3,12 @@ export interface Credentials {
   password: string;
 }
 
+export interface UpdateUser {
+  name: string;
+  job: string;
+  id: number;
+}
+
 export interface FetchData {
   avatar: string;
   email: string;
