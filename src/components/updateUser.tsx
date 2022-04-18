@@ -1,12 +1,14 @@
 import React, { Fragment, useState } from "react";
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAddUser } from "../hooks/useAddUser";
 import { Button, Container, LinearProgress, TextField } from "@mui/material";
 import { ErrorSwal, successSwal } from "../utilities/swal/swal";
 import Navbar from "./navbar";
-import UpdateIcon from '@mui/icons-material/Update';
+import UpdateIcon from "@mui/icons-material/Update";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useQuery } from "react-query";
+import { getSingleUser } from "./api/api";
 
 const Division = styled.section`
   border: 1px solid #c4c4c4c4;
@@ -23,6 +25,20 @@ const AuthForm = styled.section`
 
 const UpdateUserPage = () => {
   const navigate = useNavigate();
+  const params = useParams();
+
+  const queryInfo = useQuery(
+    "singleUser",
+    () => {
+      const routeId = parseInt(params.id!);
+      return getSingleUser(routeId);
+    },
+    {
+      onSuccess: (res) => {
+        // setUserList(res.data.data);
+      },
+    }
+  );
 
   const { mutate, isLoading } = useAddUser({
     onSuccess: () => {
