@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAddUser } from "../hooks/useAddUser";
 import { Button, Container, LinearProgress, TextField } from "@mui/material";
 import { ErrorSwal, successSwal } from "../utilities/swal/swal";
 import Navbar from "./navbar";
@@ -9,6 +8,8 @@ import UpdateIcon from "@mui/icons-material/Update";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useQuery } from "react-query";
 import { getSingleUser } from "./api/api";
+import { SingleData } from "./interfaces/interfaces";
+import { useUpdateUser } from "../hooks/useUpdateUser";
 
 const Division = styled.section`
   border: 1px solid #c4c4c4c4;
@@ -23,7 +24,7 @@ const AuthForm = styled.section`
   margin: auto;
 `;
 
-const UpdateUserPage = () => {
+const UpdateUser = () => {
   const navigate = useNavigate();
   const params = useParams();
 
@@ -34,52 +35,67 @@ const UpdateUserPage = () => {
       return getSingleUser(routeId);
     },
     {
+      refetchOnWindowFocus:false,
       onSuccess: (res) => {
-        // setUserList(res.data.data);
+        setUserData(res.data.data);
       },
     }
   );
-
-  const { mutate, isLoading } = useAddUser({
+  const [userData, setUserData] = useState<SingleData>({
+    avatar: "",
+    email: "",
+    first_name: "",
+    id: 0,
+    last_name: "",
+  });
+  console.log(userData);
+  const { mutate, isLoading } = useUpdateUser({
     onSuccess: () => {
       const route = "/user-list";
       successSwal(route, navigate);
     },
     onError: () => {
-      ErrorSwal();
+      ErrorSwal("Please try again");
     },
   });
 
-  const [{ name, job }, setUserData] = useState({
-    name: "",
-    job: "",
-  });
-
-  const addUser = async (event: React.FormEvent) => {
+  const updateUser = async (event: React.FormEvent) => {
     event.preventDefault();
-    mutate({ name, job });
-    // isLoading
+    mutate({
+      id: userData.id,
+      name: userData.first_name,
+      job: userData.last_name,
+    });
   };
   return (
     <Fragment>
       <Navbar />
       <Container>
         <Division>
-          <p>Add new user</p>
+          <p>Update user</p>
           <AuthForm>
             <TextField
               fullWidth
               style={{ marginRight: "30px" }}
-              value={name}
-              onChange={(e) => setUserData({ name: e.target.value, job })}
+              defaultValue={userData?.first_name}
+              value={userData?.first_name}
+              onChange={(e) => {
+                setUserData((prev) => ({
+                  ...prev,
+                  first_name: e.target.value,
+                }));
+              }}
               id="standard-basic"
               label="name"
               variant="outlined"
             />
             <TextField
               fullWidth
-              value={job}
-              onChange={(e) => setUserData({ name, job: e.target.value })}
+              defaultValue={userData?.last_name}
+              value={userData?.last_name}
+              onChange={(e) => {
+                setUserData((prev) => ({ ...prev, last_name: e.target.value }));
+              }}
               id="standard-basic"
               label="job"
               variant="outlined"
@@ -87,7 +103,7 @@ const UpdateUserPage = () => {
           </AuthForm>
           <section style={{ marginTop: "30px" }}>
             <Button
-              onClick={addUser}
+              onClick={updateUser}
               style={{ marginRight: "20px" }}
               variant="contained"
               color="success"
@@ -112,4 +128,4 @@ const UpdateUserPage = () => {
   );
 };
 
-export default UpdateUserPage;
+export default UpdateUser;

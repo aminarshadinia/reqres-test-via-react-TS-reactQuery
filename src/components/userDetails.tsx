@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,7 +10,7 @@ import { SingleData } from "./interfaces/interfaces";
 import Navbar from "./navbar";
 import { useParams } from "react-router-dom";
 
-const UserDetailsPage = () => {
+const UserDetails = () => {
   const params = useParams();
   const [singleUser, setSingleUser] = useState<SingleData>()
 
@@ -39,7 +39,7 @@ const UserDetailsPage = () => {
         >
           {singleUser && 
             <Fragment>
-              <Grid xs={4} spacing={3} style={{ marginTop: "30px" }}>
+              <Grid style={{ marginTop: "30px" }}>
               <p>Details...</p>
                 <Card sx={{ maxWidth: 600 }}>
                   <CardActionArea>
@@ -47,7 +47,7 @@ const UserDetailsPage = () => {
                       component="img"
                       height="200"
                       image={`${singleUser.avatar}`}
-                      alt="green iguana"
+                      alt="user avatar"
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
@@ -70,4 +70,4 @@ const UserDetailsPage = () => {
     </Fragment>
   );
 }
-export default UserDetailsPage;
+export default UserDetails;
