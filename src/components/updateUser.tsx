@@ -28,14 +28,14 @@ const UpdateUser = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  const queryInfo = useQuery(
+  useQuery(
     "singleUser",
     () => {
       const routeId = parseInt(params.id!);
       return getSingleUser(routeId);
     },
     {
-      refetchOnWindowFocus:false,
+      refetchOnWindowFocus: false,
       onSuccess: (res) => {
         setUserData(res.data.data);
       },
@@ -48,7 +48,6 @@ const UpdateUser = () => {
     id: 0,
     last_name: "",
   });
-  console.log(userData);
   const { mutate, isLoading } = useUpdateUser({
     onSuccess: () => {
       const route = "/user-list";
