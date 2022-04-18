@@ -21,7 +21,7 @@ const AuthForm = styled.section`
   margin: auto;
 `;
 
-const AddUserPage = () => {
+const AddUser = () => {
   const navigate = useNavigate();
 
   const { mutate, isLoading } = useAddUser({
@@ -30,7 +30,7 @@ const AddUserPage = () => {
       successSwal(route, navigate);
     },
     onError: () => {
-      ErrorSwal();
+      ErrorSwal('Please try again');
     },
   });
 
@@ -96,4 +96,4 @@ const AddUserPage = () => {
   );
 };
 
-export default AddUserPage;
+export default AddUser;

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -6,14 +6,16 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, Container, Grid } from "@mui/material";
 import { getUserList } from "./api/api";
 import { useQuery } from "react-query";
-import { fetchData } from "./interfaces/interfaces";
+import { FetchData } from "./interfaces/interfaces";
 import Navbar from "./navbar";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import InfoIcon from "@mui/icons-material/Info";
 
-export default function UserListPage() {
+const UserList = () => {
   const navigate = useNavigate();
-  const [userList, setUserList] = useState<fetchData[]>([]);
+  const [userList, setUserList] = useState<FetchData[]>([]);
 
   const queryInfo = useQuery(
     "userList",
@@ -31,8 +33,12 @@ export default function UserListPage() {
     navigate("/add-user");
   };
 
-  const updateUserPage = () => {
-    navigate("/update-user");
+  const updateUserPage = (id: number) => {
+    navigate(`/update-user/${id}`);
+  };
+
+  const userDetails = (id: number) => {
+    navigate(`/user-details/${id}`);
   };
 
   return (
@@ -55,29 +61,56 @@ export default function UserListPage() {
           alignItems="center"
         >
           {userList.map((data, idx) => (
-            <Grid xs={4} spacing={3} style={{ marginTop: "30px" }}>
-              <Card sx={{ maxWidth: 300 }} key={idx} onClick={updateUserPage}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={`${data.avatar}`}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {`${data.first_name}  ${data.last_name}`}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {data.email}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
+            <Fragment key={idx}>
+              <Grid xs={4} item style={{ marginTop: "30px" }} >
+                <Card sx={{ maxWidth: 300 }} >
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={`${data.avatar}`}
+                      alt="green iguana"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {`${data.first_name}  ${data.last_name}`}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {data.email}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-around"
+                    alignItems="center"
+                    style={{ margin: "20px 0" }}
+                  >
+                    <Button
+                      onClick={() => userDetails(data.id)}
+                      variant="contained"
+                      color="primary"
+                      startIcon={<InfoIcon />}
+                    >
+                      Details
+                    </Button>
+                    <Button
+                      onClick={() => updateUserPage(data.id)}
+                      variant="contained"
+                      color="secondary"
+                      startIcon={<EditIcon />}
+                    >
+                      Edit
+                    </Button>
+                  </Grid>
+                </Card>
+              </Grid>
+            </Fragment>
           ))}
         </Grid>
       </Container>
     </Fragment>
   );
-}
+};
+export default UserList;

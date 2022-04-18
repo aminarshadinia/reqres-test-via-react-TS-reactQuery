@@ -7,7 +7,7 @@ import { ErrorSwal } from "../utilities/swal/swal";
 
 const Division = styled.section`
   height: 100vh;
-  background-color: #001E3C;
+  background-color: #001e3c;
   padding-top: 200px;
 `;
 
@@ -28,14 +28,21 @@ const FormWrapper = styled.section`
   border-radius: 12px;
 `;
 
-const LoginPage = () => {
+const Login = () => {
   const navigate = useNavigate();
 
   const { mutate } = useSubmit({
     onSuccess: (variables: any) => {
       const tokenId = variables.token;
       localStorage.setItem("tokenId", tokenId);
-      localStorage.getItem("tokenId") ? navigate("/user-list") : ErrorSwal();
+      localStorage.getItem("tokenId")
+        ? navigate("/user-list")
+        : ErrorSwal("Please Login again");
+    },
+    onError: (variables: any) => {
+      if (variables.toString()) {
+        ErrorSwal('Wrong Email and Password Combination');
+      }
     },
   });
 
@@ -88,4 +95,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;
