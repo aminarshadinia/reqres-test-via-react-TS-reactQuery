@@ -32,17 +32,16 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { mutate , isLoading } = useSubmit({
-    onSuccess: (variables: any) => {
-      const tokenId = variables.token;
+    onSuccess: (data) => {
+      const tokenId = data.token;
       localStorage.setItem("tokenId", tokenId);
       localStorage.getItem("tokenId")
         ? navigate("/user-list")
         : ErrorSwal("Please Login again");
     },
-    onError: (variables: any) => {
-      if (variables.toString()) {
+    onError: (_data) => {
         ErrorSwal('Wrong Email and Password Combination');
-      }
+      
     },
   });
 
