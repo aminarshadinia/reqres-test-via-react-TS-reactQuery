@@ -2,13 +2,13 @@ import { useMutation } from "react-query"
 import { onAddUser } from "../components/api/api"
 
 export const useAddUser = ({onSuccess,onError}) => {
-  const {mutate , data, isLoading} = useMutation("handleAddUser" ,onAddUser , {
-    onSuccess : (variables) => {
-      onSuccess(data, variables)
+  const {mutate , isLoading} = useMutation("handleAddUser" ,onAddUser , {
+    onSuccess : (data) => {
+      onSuccess(data)
     },
-    onError : (variables) => {
-      onError(data,variables)
+    onError : (data) => {
+      onError(data)
     },
   })
-  return {mutate , data , isLoading}
+  return {mutate , isLoading}
 }
