@@ -5,40 +5,27 @@ export interface Credentials {
   password: string;
 }
 
+type T = any;
+
 export type LoginData = { token: string };
-export type LoginArgs = ({
+
+export type HookType = ({
   onSuccess,
   onError,
 }: {
-  onSuccess: (data: LoginData) => void;
+  onSuccess: (data: T) => void;
   onError: (data: string) => void;
 }) => {
-  mutate: UseMutateFunction<any, unknown, Credentials, unknown>;
+  mutate: UseMutateFunction<any, unknown, T, unknown>;
   isLoading: boolean;
 };
-// export interface Variables { token: string };
-// export interface Arrgs {
-//   onSucces : (variables: Variables) => void;
-//   onError: (variables: string) => void;
-//   mutate: UseMutateFunction<any, unknown, Credentials, unknown>;
-//   isLoading: boolean;
-//   data: any;
-// }
 
-export type AddUserData = { token: string };
-export type AddUserArgs = ({
-  onSuccess,
-  onError,
-}: {
-  onSuccess: (data: LoginData) => void;
-  onError: (data: string) => void;
-}) => {
-  mutate: UseMutateFunction<any, unknown, Credentials, unknown>;
-  isLoading: boolean;
-  data: any;
-};
-
-
+export interface AddUserResponse {
+  createdAt: string;
+  id: string;
+  job: string;
+  name: string;
+}
 
 export interface UpdateUser {
   name: string;

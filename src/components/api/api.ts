@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { AddUser, Credentials, UpdateUser } from "../interfaces/interfaces";
 
 export const onLogin = async (data: Credentials) => {
-  const requestConfig: AxiosRequestConfig<Credentials> = {
+  const requestConfig: AxiosRequestConfig = {
     method: "post",
     url: `${BASE_URL}/login`,
     data,
