@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { Button, LinearProgress, TextField } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  LinearProgress,
+  TextField,
+} from "@mui/material";
 import { useSubmit } from "../hooks/useSubmit";
 import { useNavigate } from "react-router-dom";
 import { ErrorSwal } from "../utilities/swal/swal";
+import LockIcon from "@mui/icons-material/Lock";
+import EmailIcon from "@mui/icons-material/Email";
 
 const Division = styled.section`
   height: 100vh;
@@ -31,7 +38,7 @@ const FormWrapper = styled.section`
 const Login = () => {
   const navigate = useNavigate();
 
-  const { mutate , isLoading } = useSubmit({
+  const { mutate, isLoading } = useSubmit({
     onSuccess: (data) => {
       const tokenId = data.token;
       localStorage.setItem("tokenId", tokenId);
@@ -40,8 +47,7 @@ const Login = () => {
         : ErrorSwal("Please Login again");
     },
     onError: (_data) => {
-        ErrorSwal('Wrong Email and Password Combination');
-      
+      ErrorSwal("Wrong Email and Password Combination");
     },
   });
 
@@ -69,9 +75,16 @@ const Login = () => {
               setCredentials({ email: e.target.value, password })
             }
             id="standard-basic"
-            label="Username"
+            label="Email"
             variant="outlined"
             style={{ marginBottom: "35px" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon />
+                </InputAdornment>
+              ),
+            }}
           />
           <TextField
             value={password}
@@ -83,6 +96,13 @@ const Login = () => {
             variant="outlined"
             type="password"
             style={{ marginBottom: "20px" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              ),
+            }}
           />
           <p style={{ marginBottom: "160px" }}>Forgot password?</p>
           <Button variant="contained" onClick={login}>
