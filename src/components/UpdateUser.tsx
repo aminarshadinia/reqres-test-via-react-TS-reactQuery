@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container, LinearProgress, TextField } from "@mui/material";
 import { ErrorSwal, successSwal } from "../utilities/swal/swal";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import UpdateIcon from "@mui/icons-material/Update";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useQuery } from "react-query";

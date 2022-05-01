@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { getSingleUser } from "./api/api";
 import { useQuery } from "react-query";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import { useParams } from "react-router-dom";
 
 const UserDetails = () => {

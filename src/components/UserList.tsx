@@ -7,7 +7,7 @@ import { Button, CardActionArea, Container, Grid } from "@mui/material";
 import { getUserList } from "./api/api";
 import { useQuery } from "react-query";
 import { FetchData } from "./interfaces/interfaces";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";

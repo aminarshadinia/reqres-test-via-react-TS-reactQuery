@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAddUser } from "../hooks/useAddUser";
 import { Button, Container, LinearProgress, TextField } from "@mui/material";
 import { ErrorSwal, successSwal } from "../utilities/swal/swal";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import DoneIcon from "@mui/icons-material/Done";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
