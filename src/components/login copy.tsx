@@ -20,7 +20,6 @@ const Division = styled.section`
 
 const AuthForm = styled.section`
   display: flex;
-  align-item: center;
   flex-direction: column;
   width: 70%;
   margin: 70px auto;

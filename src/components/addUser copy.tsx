@@ -17,7 +17,6 @@ const Division = styled.section`
 `;
 const AuthForm = styled.section`
   display: flex;
-  align-item: center;
   margin: auto;
 `;
 
