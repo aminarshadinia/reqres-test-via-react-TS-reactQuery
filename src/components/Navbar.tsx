@@ -28,9 +28,6 @@ const Navbar = () => {
     localStorage.clear();
     navigate("/");
   };
-  // useEffect(() => {
-  //   !localStorage.getItem("tokenId") && navigate("/");
-  // }, [navigate]);
 
   return (
     <Nav>

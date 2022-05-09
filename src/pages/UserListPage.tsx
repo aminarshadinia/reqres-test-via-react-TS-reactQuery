@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import UserList from '../components/userList'
+import UserList from '../components/UserList'
 
 const UserListPage = () => {
   return (

@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import UpdateUser from '../components/updateUser'
+import UpdateUser from '../components/UpdateUser'
 
 const UpdateUserPage = () => {
   return (

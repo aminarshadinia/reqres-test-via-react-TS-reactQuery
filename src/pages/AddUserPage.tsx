@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import AddUser from "../components/addUser";
+import AddUser from "../components/AddUser";
 
 const AddUserPage = () => {
   return (

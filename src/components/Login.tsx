@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import {
   Button,
@@ -20,7 +20,6 @@ const Division = styled.section`
 
 const AuthForm = styled.section`
   display: flex;
-  align-item: center;
   flex-direction: column;
   width: 70%;
   margin: 70px auto;
@@ -60,10 +59,6 @@ const Login = () => {
     event.preventDefault();
     mutate({ email, password });
   };
-
-  useEffect(() => {
-    localStorage.getItem("tokenId") && navigate("/user-list");
-  }, []);
 
   return (
     <Division>

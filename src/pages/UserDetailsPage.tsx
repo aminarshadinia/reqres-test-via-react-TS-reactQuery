@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import UserDetails from '../components/userDetails'
+import UserDetails from '../components/UserDetails'
 
 const UserDetailsPage = () => {
   return (
