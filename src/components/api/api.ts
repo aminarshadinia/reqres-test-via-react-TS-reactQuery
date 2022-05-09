@@ -1,6 +1,15 @@
 import { BASE_URL } from "../../env";
 import axios, { AxiosRequestConfig } from "axios";
-import { AddUser, Credentials, UpdateUser } from "../interfaces/interfaces";
+import {
+  AddUser,
+  AddUserResponse,
+  Credentials,
+  FetchUserData,
+  SingleData,
+  IUpdateUser,
+  LoginData,
+  UpdateResponse,
+} from "../interfaces/interfaces";
 
 export const onLogin = async (data: Credentials) => {
   const requestConfig: AxiosRequestConfig = {
@@ -8,7 +17,7 @@ export const onLogin = async (data: Credentials) => {
     url: `${BASE_URL}/login`,
     data,
   };
-  const { data: response } = await axios.request(requestConfig);
+  const { data: response } = await axios.request<LoginData>(requestConfig);
   return response;
 };
 
@@ -17,7 +26,8 @@ export const getUserList = async () => {
     method: "get",
     url: `${BASE_URL}/users?page=2`,
   };
-  return axios.request(requestConfig);
+  const { data: response } = await axios.request<FetchUserData>(requestConfig);
+  return response;
 };
 
 export const getSingleUser = async (id: number) => {
@@ -25,7 +35,9 @@ export const getSingleUser = async (id: number) => {
     method: "get",
     url: `${BASE_URL}/users/${id}`,
   };
-  return axios.request(requestConfig);
+  // return axios.request(requestConfig);
+  const { data: response } = await axios.request<SingleData>(requestConfig);
+  return response;
 };
 
 export const onAddUser = async (data: AddUser) => {
@@ -34,17 +46,20 @@ export const onAddUser = async (data: AddUser) => {
     url: `${BASE_URL}/users`,
     data,
   };
-  const { data: response } = await axios.request(requestConfig);
+  const { data: response } = await axios.request<AddUserResponse>(
+    requestConfig
+  );
   return response;
 };
 
-export const onUpdateUser = async (data: UpdateUser) => {
+export const onUpdateUser = async (data: IUpdateUser) => {
   const id = data.id;
   const requestConfig: AxiosRequestConfig = {
     method: "put",
     url: `${BASE_URL}/users/${id}`,
     data,
   };
-  const { data: response } = await axios.request(requestConfig);
+  const { data: response } = await axios.request<UpdateResponse>(requestConfig);
+  console.log(response,'dddd')
   return response;
 };

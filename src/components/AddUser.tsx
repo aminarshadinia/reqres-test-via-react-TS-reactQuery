@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useAddUser } from "../hooks/useAddUser";
 import { Button, Container, LinearProgress, TextField } from "@mui/material";
 import { ErrorSwal, successSwal } from "../utilities/swal/swal";
-import Navbar from "./Navbar";
 import DoneIcon from "@mui/icons-material/Done";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
@@ -29,7 +28,7 @@ const AddUser = () => {
       successSwal(route, navigate);
     },
     onError: () => {
-      ErrorSwal('Please try again');
+      ErrorSwal("Please try again");
     },
   });
 
@@ -41,11 +40,9 @@ const AddUser = () => {
   const addUser = async (event: React.FormEvent) => {
     event.preventDefault();
     mutate({ name, job });
-    // isLoading
   };
   return (
     <Fragment>
-      <Navbar />
       <Container>
         <Division>
           <p>Add new user</p>

@@ -5,20 +5,19 @@ export interface Credentials {
   password: string;
 }
 
-type T = any;
-
 export type LoginData = { token: string };
 
-export type HookType = ({
-  onSuccess,
-  onError,
-}: {
-  onSuccess: (data: T) => void;
-  onError: (data: string) => void;
-}) => {
-  mutate: UseMutateFunction<any, unknown, T, unknown>;
-  isLoading: boolean;
-};
+// type T = any;
+// export type HookType = ({
+//   onSuccess,
+//   onError,
+// }: {
+//   onSuccess: (data: T) => void;
+//   onError: (data: string) => void;
+// }) => {
+//   mutate: UseMutateFunction<any, unknown, T, unknown>;
+//   isLoading: boolean;
+// };
 
 export interface AddUserResponse {
   createdAt: string;
@@ -27,18 +26,29 @@ export interface AddUserResponse {
   name: string;
 }
 
-export interface UpdateUser {
+export interface IUpdateUser {
   name: string;
   job: string;
   id: number;
 }
 
-export interface FetchData {
-  avatar: string;
-  email: string;
-  first_name: string;
-  id: number;
-  last_name: string;
+export interface UpdateResponse {
+  id: 0;
+  name: "";
+  job: "";
+  updatedAt: "";
+}
+
+export interface FetchUserData {
+  data: [
+    {
+      avatar: string;
+      email: string;
+      first_name: string;
+      id: number;
+      last_name: string;
+    }
+  ];
 }
 
 export interface AddUser {
@@ -47,9 +57,16 @@ export interface AddUser {
 }
 
 export interface SingleData {
-  avatar: string;
-  email: string;
-  first_name: string;
-  id: number;
-  last_name: string;
+    data: {
+      avatar: string;
+      email: string;
+      first_name: string;
+      id: number;
+      last_name: string;
+    };
+}
+
+export interface MutationType<T> {
+  onSuccess: (data: T) => void;
+  onError: (err: unknown) => void;
 }

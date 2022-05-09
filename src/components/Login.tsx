@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import {
   Button,
@@ -59,10 +59,6 @@ const Login = () => {
     event.preventDefault();
     mutate({ email, password });
   };
-
-  useEffect(() => {
-    localStorage.getItem("tokenId") && navigate("/user-list");
-  }, []);
 
   return (
     <Division>
